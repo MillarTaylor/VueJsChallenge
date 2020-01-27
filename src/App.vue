@@ -20,6 +20,7 @@
     </b-navbar>
     
   <component :is="component" v-bind="getPosts"></component>
+  <footer class="footer"></footer>
    
   </div>
   

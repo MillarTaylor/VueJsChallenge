@@ -1,7 +1,9 @@
 <template slot-scope="props">
   <div id="tableContainer">
     <h3 style="{color:black}">Users</h3>
-  <b-table 
+    
+  <b-table
+    :head-variant='dark'
     :data="users" 
     :columns="userCols"
     :default-sort-direction="defaultSortDirection"
@@ -9,8 +11,10 @@
     :sort-icon-size="sortIconSize"
     default-sort="user.name"
     :selected.sync= "selected"
-    :bordered="true"
-    :stripped="true"></b-table>
+    :bordered="false"
+    :stripped="true"
+    @click="this.getPosts(item)"></b-table>
+    
   </div>
 </template>
 
@@ -24,9 +28,10 @@ export default {
   components: {
   },
   methods: {
-    getPosts(){
+    getPosts(row){
+        console.log("here")
         
-      this.parent.getPosts();
+      this.parent.getPosts(row);
     }
   },
  
@@ -44,17 +49,20 @@ export default {
            width: '40',
            numeric: true,
            sortable: true,
+           searchable: true
 
        },
        {
            field: 'name',
            label: 'Name',
-           sortable: true
+           sortable: true,
+            searchable: true
        },
        {
            field: 'email',
            label: 'Email',
-           sortable: true
+           sortable: true,
+           searchable: true
        },
        {
            field: 'phone',
