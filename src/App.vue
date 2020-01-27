@@ -19,20 +19,34 @@
       </template>      
     </b-navbar>
     
-   <Users></Users>
+  <component :is="component" v-bind="getPosts"></component>
    
   </div>
   
 </template>
 
 <script>
-  import Users from './components/Users'
+  import Users from './components/Users.vue'
+  import Posts from './components/Posts.vue'
 
 export default {
   
   name: "app",
   components: {
-    Users
+   'users': Users,
+   'posts':Posts
+  },
+  data(){
+    return {
+      component: 'users'
+    }
+  },
+  methods:{
+    getPosts: function(){
+      if(this.component==='users'){
+        this.component = 'posts'  
+      } 
+    }
   }
   
 };
