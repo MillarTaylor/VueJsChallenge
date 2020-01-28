@@ -1,5 +1,9 @@
 
 @import "~bulma/sass/utilities/_all";
+@import "~bulma";
+
+@import "~buefy/src/scss/buefy.scss";
+
 $primary: #673AB7;
 $primary-invert: findColorInvert($primary);
 
@@ -7,7 +11,6 @@ $colors: (
     "white": ($white, $black),
     "black": ($black, $white),
     "light": ($light, $light-invert),
-    "dark": ($dark, $dark-invert),
     "primary": ($primary, $primary-invert),
     "info": ($info, $info-invert),
     "success": ($success, $success-invert),
@@ -37,8 +40,14 @@ h3{
 	transition: .5s
 }
 
-@import "~bulma";
-@import "~buefy/src/scss/buefy";
+
+.userTable thead {
+  background-color: dar;
+}
+#componentCard .card-header {
+  padding: 0;
+  
+}
 
 .footer {
     width: 100%;

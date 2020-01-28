@@ -1,25 +1,22 @@
 <template slot-scope="props">
   <div id="tableContainer">
-    <h3 style="{color:black}">Users</h3>
+   <!-- <h3 style="{color:black}">Users</h3>-->
     
-  <b-table
-    :head-variant='dark'
-    :data="users" 
-    :columns="userCols"
-    :default-sort-direction="defaultSortDirection"
-    :sort-icon="sortIcon"
-    :sort-icon-size="sortIconSize"
+  <b-table class="b-table"
+    :items="users" 
+    :fields="userCols"
+    :bordered="true"
     default-sort="user.name"
-    :selected.sync= "selected"
-    :bordered="false"
-    :stripped="true"
-    @click="this.getPosts(item)"></b-table>
+    :striped="true"
+    :hover="true"
+    @row-clicked="rowClicked"></b-table>
     
   </div>
 </template>
 
 <script>
   import axios from 'axios';
+  import '../styles/myStyles.scss'
   
 
 export default {
@@ -28,52 +25,40 @@ export default {
   components: {
   },
   methods: {
-    getPosts(row){
-        console.log("here")
-        
-      this.parent.getPosts(row);
-    }
-  },
- 
+  
+    getPosts(item){        
+      this.$parent.getPosts(item);
+    },
+    rowClicked(item) {
+  
+    this.getPosts(item.id);
+  }
+  }, 
   data: function (){
     return {
       users: [],
-      selected: null,
-      defaultSortDirection: 'asc',
-      sortIcon: 'arrow-up',
-      sortIconSize: 'is-small',
       userCols: [
-       {
-           field: 'id',
-           label: 'ID',
-           width: '40',
-           numeric: true,
-           sortable: true,
-           searchable: true
-
-       },
-       {
-           field: 'name',
-           label: 'Name',
-           sortable: true,
-            searchable: true
-       },
-       {
-           field: 'email',
-           label: 'Email',
-           sortable: true,
-           searchable: true
-       },
-       {
-           field: 'phone',
-           label: 'Phone',
-           centered: true,
-       },
-       {
-           field: 'website',
-           label: 'Website',
-       }
-     ]
+        {
+          key:'id',
+          sortable: true
+         },
+         {
+           key:'name',
+           sortable: true
+         },
+         {
+           key:'email',
+           sortable: true
+         },
+         {
+           key:'phone', 
+           sortable: true
+         }, 
+      {key:'website',
+      sortable: true
+      }
+      ]
+      
     }
   }, 
   mounted: function(){

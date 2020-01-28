@@ -1,53 +1,51 @@
 <template>
   <div id="tableContainer">
-    <h3 style="{color:black}">Posts</h3>
-  <b-table 
-    :data="posts" 
-    :columns="postCols"
-    :bordered="true"
-    :stripped="true"></b-table>
+    <!--<h3 style="{color:black}">Posts</h3>-->
+    <b-table
+      :data="posts"
+      :columns="postCols"
+      :bordered="true"
+      :stripped="true"
+    />
   </div>
 </template>
 
 <script>
-  import axios from 'axios';
-  
+import axios from "axios";
+import "../styles/myStyles.scss";
 
 export default {
-  
   name: "app",
-  components: {
+  
+  props:{
+    userId: Number
   },
-  props: {
-    id: String
-  },
- 
-  data: function (){
+  data: function() {
     return {
-      posts: [],
+      userPosts: this.retrievePosts(),
       postCols: [
-       {
-           field: 'id',
-           label: 'ID',
-           width: '40',
-           numeric: true
-       },
-       {
-           field: 'title',
-           label: 'Tile',
-       },
-       {
-           field: 'body',
-           label: 'Body',
-       }
-     ]
-    }
-  }, 
-  mounted: function(){
-     axios.get('https://jsonplaceholder.typeicode.com/posts/1')
-     .then(response => {
-       this.posts = response.data;   
-     });
-  }
+        {
+          field: "id",
+        },
+        {
+          field: "title",
+        },
+        {
+          field: "body",
+         
+        }
+      ]
+    };
+  },
+  mounted() {
+       console.log("here");
+      axios
+        .get("https://jsonplaceholder.typeicode.com/posts/"+this.userId)
+        .then(response => {
+         this.userPosts= response.data;
+          
+        });
+     }
+  
 };
 </script>
